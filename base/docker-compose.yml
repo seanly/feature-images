@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  demo:
+    build:
+      context: ./demo
+    image: seanly/imgutils:base-demo-v1.0

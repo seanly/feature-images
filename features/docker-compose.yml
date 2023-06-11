@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  hello:
+    build:
+      context: ./hello
+    image: seanly/imgutils:feature-hello-v1.0
