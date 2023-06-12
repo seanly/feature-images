@@ -1,11 +1,11 @@
 version: "3"
 
 services:
-  hello:
+  base:
     build:
-      context: ./hello
-    image: seanly/feature-images:hello-v1.0
+      context: ./base
+    image: seanly/feature-images:features-base-v1.0
   world:
     build:
       context: ./world
-    image: seanly/feature-images:world-v1.0
+    image: seanly/feature-images:features-world-v1.0

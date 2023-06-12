@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  demo:
+  rockylinux9:
     build:
-      context: ./demo
+      context: ./rockylinux9
       dockerfile: ./Dockerfile.features
-    image: seanly/features:base-demo-v1.0
+    image: seanly/feature-images:base-rockylinux9
