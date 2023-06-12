@@ -41,7 +41,7 @@ RUN --mount=type=bind,from=feature_hello_v1.0,source=/tmp/build-feature-src,targ
 
 ```bash
 cd base
-cat demo/Dockerfile | bash ../bind-features.sh > demo/Dockerfile.features
-docker-compose build demo
-
+bash bind-features.sh  < base/rockylinux9/Dockerfile > Dockerfile.features
+# or
+bash bind-features.sh --bind-feature=base@v1.0 < base/rockylinux9/Dockerfile > Dockerfile.features
 ```
