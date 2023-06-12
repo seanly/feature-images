@@ -1,0 +1,21 @@
+
+FROM centos:7
+
+RUN --mount=type=bind,from=seanly/feature-images:hello-v1.0,source=/src,target=/tmp/feature-src \
+      cp -ar /tmp/feature-src /tmp/build-src; chmod -R 0755 /tmp/build-src \
+      && cd /tmp/build-src; chmod +x ./install.sh \
+      ;echo 'export __FEATURE_PATH__=/tmp/build-src' >> /tmp/build-src/.feature.buildins.env \
+      ;source /tmp/build-src/.feature.buildins.env; ./install.sh \
+      && rm -rf /tmp/build-src
+      
+RUN --mount=type=bind,from=seanly/feature-images:world-v1.0,source=/src,target=/tmp/feature-src \
+      cp -ar /tmp/feature-src /tmp/build-src; chmod -R 0755 /tmp/build-src \
+      && cd /tmp/build-src; chmod +x ./install.sh \
+      ;echo 'export __FEATURE_PATH__=/tmp/build-src' >> /tmp/build-src/.feature.buildins.env \
+      ;source /tmp/build-src/.feature.buildins.env; ./install.sh \
+      && rm -rf /tmp/build-src
+      
+
+
+ENTRYPOINT ["/run.sh"]
+

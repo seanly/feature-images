@@ -40,6 +40,8 @@ RUN --mount=type=bind,from=feature_hello_v1.0,source=/tmp/build-feature-src,targ
 ## usage
 
 ```bash
-cat base/demo/Dockerfile | bash preprocess.sh > Dockerfile.features
-docker build -t base:demo base/demo/ -f Dockerfile.features
+cd base
+cat demo/Dockerfile | bash ../bind-features.sh > demo/Dockerfile.features
+docker-compose build demo
+
 ```

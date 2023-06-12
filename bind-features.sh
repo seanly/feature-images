@@ -1,10 +1,10 @@
 #!/bin/bash
-
+set -eux
 new_dockerfile=""
 
 # 逐行处理标准输入
 while IFS= read -r line; do
-  if [[ $line =~ ^\s*"# ::feature:: " ]]; then
+  if [[ "$line" =~ ^\s*"# ::feature:: " ]]; then
     # 匹配以 # ::feature:: 开头的注释行
     regex="# ::feature:: ([^@]+)(@([^ ]+)(.*))?"
     if [[ $line =~ $regex ]]; then
@@ -14,9 +14,11 @@ while IFS= read -r line; do
       remaining_content="${BASH_REMATCH[4]}"
 
       # 构建 RUN bind 命令
-      bind_command="RUN --mount=type=bind,from=seanly/imgutils:feature-$feature_name-$version,source=/src,target=/tmp/feature-src \\
+      bind_command="RUN --mount=type=bind,from=seanly/feature-images:$feature_name-$version,source=/src,target=/tmp/feature-src \\
       cp -ar /tmp/feature-src /tmp/build-src; chmod -R 0755 /tmp/build-src \\
-      && cd /tmp/build-src; chmod +x ./install.sh; ./install.sh \\
+      && cd /tmp/build-src; chmod +x ./install.sh \\
+      ;echo 'export __FEATURE_PATH__=/tmp/build-src' >> /tmp/build-src/.feature.buildins.env \\
+      ;source /tmp/build-src/.feature.buildins.env; ./install.sh \\
       && rm -rf /tmp/build-src
       "
 

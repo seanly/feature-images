@@ -4,8 +4,8 @@ services:
   hello:
     build:
       context: ./hello
-    image: seanly/imgutils:feature-hello-v1.0
+    image: seanly/feature-images:hello-v1.0
   world:
     build:
       context: ./world
-    image: seanly/imgutils:feature-world-v1.0
+    image: seanly/feature-images:world-v1.0

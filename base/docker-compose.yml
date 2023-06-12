@@ -4,4 +4,5 @@ services:
   demo:
     build:
       context: ./demo
-    image: seanly/imgutils:base-demo-v1.0
+      dockerfile: ./Dockerfile.features
+    image: seanly/features:base-demo-v1.0
