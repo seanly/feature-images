@@ -5,3 +5,7 @@ services:
     build:
       context: ./hello
     image: seanly/imgutils:feature-hello-v1.0
+  world:
+    build:
+      context: ./world
+    image: seanly/imgutils:feature-world-v1.0
