@@ -9,7 +9,7 @@
 FROM centos:7
 
 # ::feature:: hello@v1.0
-RUN --mount=type=bind,from=seanly/imgutils:feature-hello-v1.0,source=/src,target=/tmp/feature-src \
+RUN --mount=type=bind,from=seanly/feature-images:features-hello-v1.0,source=/src,target=/tmp/feature-src \
     cp -ar /tmp/feature-src /tmp/build-src \
     && chmod -R 0755 /tmp/build-src \
     && cd /tmp/build-src \
@@ -19,7 +19,7 @@ RUN --mount=type=bind,from=seanly/imgutils:feature-hello-v1.0,source=/src,target
 
 # ::feature:: hello@v1.0 { hello: 'hi, world' }
 FROM centos:7 as feature_hello_v1.0
-COPY --from=seanly/imgutils:feature-hello-v1.0 /src /tmp/feature-src
+COPY --from=seanly/feature-images:features-hello-v1.0 /src /tmp/feature-src
 RUN set -eux \
     ;echo "export __FEATURE_HELLO_HELLO__='hi, world'" >> /tmp/feature-src/.feature.buildins.env
 
